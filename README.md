@@ -1,3 +1,5 @@
+This is react application which using boostrap library, and pexels api for the demo data, before using this application you need to get pexels API token here https://www.pexels.com/api/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

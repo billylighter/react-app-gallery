@@ -6,7 +6,7 @@ import { createClient } from 'pexels';
 import { useEffect, useState } from "react";
 import FsLightbox from 'fslightbox-react';
 
-const client = createClient(process.env.REACT_APP_API_KEY);
+const client = createClient(process.env.REACT_APP_API_KEY_PEXELS);
 
 function App() {
     const [isImagesLoaded, setIsImagesLoaded] = useState(false);

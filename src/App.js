@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Button, Col, Container, Row} from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner';
-import { createClient } from 'pexels';
-import { useEffect, useState } from "react";
+import {createClient} from 'pexels';
+import {useEffect, useState} from "react";
 import FsLightbox from 'fslightbox-react';
 
 const client = createClient(process.env.REACT_APP_API_KEY_PEXELS);
@@ -21,7 +21,7 @@ function App() {
     // Function to fetch images
     const getImages = (currentPage) => {
         setIsImagesLoaded(false);
-        client.photos.search({ query: 'nature', per_page: 15, page: currentPage })
+        client.photos.search({query: 'nature', per_page: 3, page: currentPage})
             .then((response) => {
                 const newImages = response.photos;
                 setImages((prevImages) => [...prevImages, ...newImages]);
@@ -52,6 +52,7 @@ function App() {
 
     // Open FsLightbox when an image is clicked
     const openLightbox = (index) => {
+        console.log(lightboxSources[index])
         setLightboxIndex(index);
         setLightboxToggler(!lightboxToggler);
     };
@@ -64,7 +65,7 @@ function App() {
                     {(Array.isArray(images) && images.length) ? (
                         <div className='masonry-container'>
                             {images.map((img, index) => (
-                                <div key={index} className="masonry-item" onClick={() => openLightbox(index)}>
+                                <div key={index} className="masonry-item">
                                     <img
                                         src={img.src.medium}
                                         alt={`Nature ${img.id}`}
@@ -76,6 +77,7 @@ function App() {
                                             ${img.src.large} 1200w
                                         `}
                                         sizes="(max-width: 600px) 320px, (max-width: 1000px) 480px, 800px"
+                                        onClick={() => openLightbox(index)}
                                     />
                                 </div>
                             ))}
@@ -110,8 +112,8 @@ function App() {
             <FsLightbox
                 toggler={lightboxToggler}
                 sources={lightboxSources}
-
                 slide={lightboxIndex + 1}
+                key={lightboxSources.length}
             />
         </Container>
     );
